@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Animal Adoption Center</title>
-  <meta name="description" content="Discover adoptable animals and nearby shelters">
+  <title>Animal Search & Adoption</title>
+  <meta name="description" content="Search and filter adoptable animals">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,69 +19,54 @@
 
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <h1>🐾 Animal Adoption Center</h1>
-    <nav>
-      <a href="./index.html">Home</a>
-      <a href="./favorites.html">Favorites</a>
-    </nav>
-  </header>
+<header class="header">
+  <h1>🐾 Animal Adoption Center</h1>
+  <nav>
+    <a href="./index.html">Search</a>
+    <a href="./favorites.html">Favorites</a>
+  </nav>
+</header>
 
-  <!-- MAIN LAYOUT -->
-  <main class="layout">
+<main class="layout">
 
-    <!-- FILTERS SIDEBAR -->
-    <aside class="filters" aria-label="Animal filters">
-      <h2>Filters</h2>
+  <aside class="filters" aria-label="Animal filters">
+    <h2>Filters</h2>
 
-      <label>
-        Type
-        <select id="typeFilter">
-          <option value="">All</option>
-          <option value="Dog">Dog</option>
-          <option value="Cat">Cat</option>
-        </select>
-      </label>
+    <label>
+      Type
+      <select id="typeFilter">
+        <option value="">All</option>
+        <option value="Dog">Dog</option>
+        <option value="Cat">Cat</option>
+      </select>
+    </label>
 
-      <label>
-        Age
-        <select id="ageFilter">
-          <option value="">All</option>
-          <option value="Baby">Baby</option>
-          <option value="Young">Young</option>
-          <option value="Adult">Adult</option>
-        </select>
-      </label>
-    </aside>
+    <label>
+      Age
+      <select id="ageFilter">
+        <option value="">All</option>
+        <option value="Baby">Baby</option>
+        <option value="Young">Young</option>
+        <option value="Adult">Adult</option>
+      </select>
+    </label>
+  </aside>
 
-    <!-- CONTENT -->
-    <section>
+  <section>
+    <p id="status" class="status" role="status">
+      Loading animals...
+    </p>
 
-      <p id="status" class="status" role="status">
-        Loading animals...
-      </p>
+    <div id="animals" class="grid"></div>
+  </section>
 
-      <div id="animals" class="grid"></div>
+</main>
 
-      <div class="map-container">
-        <h2>Nearby Shelters</h2>
-        <iframe
-          src="https://www.google.com/maps?q=animal+shelter+near+me&output=embed"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-      </div>
+<footer class="footer">
+  © 2026 — Danielle Acosta 💚
+</footer>
 
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    © 2026 — Danielle Acosta 💚
-  </footer>
-
-  <script type="module" src="./js/main.js"></script>
+<script type="module" src="./js/main.js"></script>
 
 </body>
 </html>

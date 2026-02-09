@@ -91,95 +91,94 @@ export const animals = [
     image: "https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDR8fGRvZ3xlbnwwfHwwfHx8MA%3D%3D"
   },
 
-  // 🐱 Cats
-  {
-    name: "Bella",
-    type: "Cat",
-    age: "Baby",
-    image: "https://placekitten.com/400/300"
-  },
-  {
-    name: "Oliver",
-    type: "Cat",
-    age: "Adult",
-    image: "https://placekitten.com/401/300"
-  },
-  {
-    name: "Milo",
-    type: "Cat",
-    age: "Young",
-    image: "https://placekitten.com/402/300"
-  },
-  {
-    name: "Chloe",
-    type: "Cat",
-    age: "Adult",
-    image: "https://placekitten.com/403/300"
-  },
-  {
-    name: "Leo",
-    type: "Cat",
-    age: "Senior",
-    image: "https://placekitten.com/404/300"
-  },
-  {
-    name: "Nala",
-    type: "Cat",
-    age: "Baby",
-    image: "https://placekitten.com/405/300"
-  },
-  {
-    name: "Simba",
-    type: "Cat",
-    age: "Young",
-    image: "https://placekitten.com/406/300"
-  },
-  {
-    name: "Loki",
-    type: "Cat",
-    age: "Senior",
-    image: "https://placekitten.com/407/300"
-  },
-  {
-    name: "Cleo",
-    type: "Cat",
-    age: "Adult",
-    image: "https://placekitten.com/408/300"
-  },
-  {
-    name: "Kitty",
-    type: "Cat",
-    age: "Baby",
-    image: "https://placekitten.com/409/300"
-  },
-  {
-    name: "Oscar",
-    type: "Cat",
-    age: "Young",
-    image: "https://placekitten.com/410/300"
-  },
-  {
-    name: "Misty",
-    type: "Cat",
-    age: "Senior",
-    image: "https://placekitten.com/411/300"
-  },
-  {
-    name: "Pepper",
-    type: "Cat",
-    age: "Adult",
-    image: "https://placekitten.com/412/300"
-  },
-  {
-    name: "Snowball",
-    type: "Cat",
-    age: "Baby",
-    image: "https://placekitten.com/413/300"
-  },
-  {
-    name: "Tiger",
-    type: "Cat",
-    age: "Senior",
-    image: "https://placekitten.com/414/300"
-  }
-];
+// 🐱 Cats
+{
+  name: "Bella",
+  type: "Cat",
+  age: "Baby",
+  image: "https://cataas.com/cat?width=400&height=300"
+},
+{
+  name: "Oliver",
+  type: "Cat",
+  age: "Adult",
+  image: "https://cataas.com/cat?type=or&width=401&height=300"
+},
+{
+  name: "Milo",
+  type: "Cat",
+  age: "Young",
+  image: "https://cataas.com/cat?type=square&width=402&height=300"
+},
+{
+  name: "Chloe",
+  type: "Cat",
+  age: "Adult",
+  image: "https://cataas.com/cat?width=403&height=300"
+},
+{
+  name: "Leo",
+  type: "Cat",
+  age: "Senior",
+  image: "https://cataas.com/cat?type=small&width=404&height=300"
+},
+{
+  name: "Nala",
+  type: "Cat",
+  age: "Baby",
+  image: "https://cataas.com/cat?width=405&height=300"
+},
+{
+  name: "Simba",
+  type: "Cat",
+  age: "Young",
+  image: "https://cataas.com/cat?type=or&width=406&height=300"
+},
+{
+  name: "Loki",
+  type: "Cat",
+  age: "Senior",
+  image: "https://cataas.com/cat?width=407&height=300"
+},
+{
+  name: "Cleo",
+  type: "Cat",
+  age: "Adult",
+  image: "https://cataas.com/cat?type=square&width=408&height=300"
+},
+{
+  name: "Kitty",
+  type: "Cat",
+  age: "Baby",
+  image: "https://cataas.com/cat?width=409&height=300"
+},
+{
+  name: "Oscar",
+  type: "Cat",
+  age: "Young",
+  image: "https://cataas.com/cat?width=410&height=300"
+},
+{
+  name: "Misty",
+  type: "Cat",
+  age: "Senior",
+  image: "https://cataas.com/cat?type=small&width=411&height=300"
+},
+{
+  name: "Pepper",
+  type: "Cat",
+  age: "Adult",
+  image: "https://cataas.com/cat?width=412&height=300"
+},
+{
+  name: "Snowball",
+  type: "Cat",
+  age: "Baby",
+  image: "https://cataas.com/cat?width=413&height=300"
+},
+{
+  name: "Tiger",
+  type: "Cat",
+  age: "Senior",
+  image: "https://cataas.com/cat?width=414&height=300"
+};

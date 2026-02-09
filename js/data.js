@@ -181,4 +181,5 @@ export const animals = [
   type: "Cat",
   age: "Senior",
   image: "https://cataas.com/cat?width=414&height=300"
-}
+  }
+];

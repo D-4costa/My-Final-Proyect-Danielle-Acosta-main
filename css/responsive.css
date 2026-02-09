@@ -1,3 +1,7 @@
-@media(max-width:768px){
-.layout{grid-template-columns:1fr}
+#status,
+.status {
+  text-align: center;
+  margin: 2rem 0;
+  color: #4CAF50;
+  font-weight: 500;
 }

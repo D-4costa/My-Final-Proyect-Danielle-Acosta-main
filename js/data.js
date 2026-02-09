@@ -4,91 +4,91 @@ export const animals = [
     name: "Luna",
     type: "Dog",
     age: "Young",
-    image: "https://images.dog.ceo/breeds/husky/n02110185_1469.jpg"
+    image: "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=400"
   },
   {
     name: "Max",
     type: "Dog",
     age: "Adult",
-    image: "https://images.dog.ceo/breeds/retriever-golden/n02099601_3004.jpg"
+    image: "https://images.unsplash.com/photo-1558788353-f76d92427f16?w=400"
   },
   {
     name: "Rocky",
     type: "Dog",
     age: "Young",
-    image: "https://images.dog.ceo/breeds/pug/n02110958_15424.jpg"
+    image: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400"
   },
   {
     name: "Lucy",
     type: "Dog",
     age: "Baby",
-    image: "https://images.dog.ceo/breeds/beagle/n02088364_11136.jpg"
+    image: "https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?w=400"
   },
   {
     name: "Buddy",
     type: "Dog",
     age: "Senior",
-    image: "https://images.dog.ceo/breeds/germanshepherd/n02106662_5453.jpg"
+    image: "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?w=400"
   },
   {
     name: "Charlie",
     type: "Dog",
     age: "Adult",
-    image: "https://images.dog.ceo/breeds/labrador/n02099712_5642.jpg"
+    image: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400"
   },
   {
     name: "Daisy",
     type: "Dog",
     age: "Baby",
-    image: "https://images.dog.ceo/breeds/chihuahua/n02085620_3408.jpg"
+    image: "https://images.unsplash.com/photo-1598133894008-61f7fdb8cc3a?w=400"
   },
   {
     name: "Toby",
     type: "Dog",
     age: "Senior",
-    image: "https://images.dog.ceo/breeds/doberman/n02107142_799.jpg"
+    image: "https://images.unsplash.com/photo-1517849845537-4d257902454a?w=400"
   },
   {
     name: "Cooper",
     type: "Dog",
     age: "Young",
-    image: "https://images.dog.ceo/breeds/boxer/n02108089_1218.jpg"
+    image: "https://images.unsplash.com/photo-1583512603806-077998240c7a?w=400"
   },
   {
     name: "Molly",
     type: "Dog",
     age: "Adult",
-    image: "https://images.dog.ceo/breeds/pitbull/pitbull_dog.jpg"
+    image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?w=400"
   },
   {
     name: "Bear",
     type: "Dog",
     age: "Senior",
-    image: "https://images.dog.ceo/breeds/rottweiler/n02106550_10268.jpg"
+    image: "https://images.unsplash.com/photo-1552053831-71594a27632d?w=400"
   },
   {
     name: "Bailey",
     type: "Dog",
     age: "Baby",
-    image: "https://images.dog.ceo/breeds/shih-tzu/n02086240_5094.jpg"
+    image: "https://images.unsplash.com/photo-1600804340584-c7db2eacf0bf?w=400"
   },
   {
     name: "Zeus",
     type: "Dog",
     age: "Adult",
-    image: "https://images.dog.ceo/breeds/mastiff-bull/n02108422_4373.jpg"
+    image: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=400"
   },
   {
     name: "Bruno",
     type: "Dog",
     age: "Young",
-    image: "https://images.dog.ceo/breeds/bulldog-english/jager-1.jpg"
+    image: "https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?w=400"
   },
   {
     name: "Shadow",
     type: "Dog",
     age: "Senior",
-    image: "https://images.dog.ceo/breeds/dalmatian/cooper1.jpg"
+    image: "https://images.unsplash.com/photo-1507149833265-60c372daea22?w=400"
   },
 
   // 🐱 Cats
@@ -96,89 +96,91 @@ export const animals = [
     name: "Bella",
     type: "Cat",
     age: "Baby",
-    image: "https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg"
+    image: "https://images.unsplash.com/photo-1595433562696-19d0c6c0f9e6?w=400"
   },
   {
     name: "Oliver",
     type: "Cat",
     age: "Adult",
-    image: "https://cdn2.thecatapi.com/images/MTY3ODIyNA.jpg"
+    image: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=400"
   },
   {
     name: "Milo",
     type: "Cat",
     age: "Young",
-    image: "https://cdn2.thecatapi.com/images/MTY3ODIyNw.jpg"
+    image: "https://images.unsplash.com/photo-1606225457115-9b0c6f2a5996?w=400"
   },
   {
     name: "Chloe",
     type: "Cat",
     age: "Adult",
-    image: "https://cdn2.thecatapi.com/images/MTY3ODIzMA.jpg"
+    image: "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400"
   },
   {
     name: "Leo",
     type: "Cat",
     age: "Senior",
-    image: "https://cdn2.thecatapi.com/images/MTY3ODIzMw.jpg"
+    image: "https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?w=400"
   },
   {
     name: "Nala",
     type: "Cat",
     age: "Baby",
-    image: "https://cdn2.thecatapi.com/images/MTY3ODIzNg.jpg"
+    image: "https://images.unsplash.com/photo-1596854407944-bf87f6fdd49e?w=400"
   },
   {
     name: "Simba",
     type: "Cat",
     age: "Young",
-    image: "https://cdn2.thecatapi.com/images/MTY3ODIzOQ.jpg"
+    image: "https://images.unsplash.com/photo-1543852786-1cf6624b9987?w=400"
   },
   {
     name: "Loki",
     type: "Cat",
     age: "Senior",
-    image: "https://cdn2.thecatapi.com/images/MTY3ODI0Mg.jpg"
+    image: "https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=400"
   },
   {
     name: "Cleo",
     type: "Cat",
     age: "Adult",
-    image: "https://cdn2.thecatapi.com/images/MTY3ODI0NQ.jpg"
+    image: "https://images.unsplash.com/photo-1516972810927-80185027ca84?w=400"
   },
   {
     name: "Kitty",
     type: "Cat",
     age: "Baby",
-    image: "https://cdn2.thecatapi.com/images/MTY3ODI0OA.jpg"
+    image: "https://images.unsplash.com/photo-1606214174585-fe31582dc6ee?w=400"
   },
   {
     name: "Oscar",
     type: "Cat",
     age: "Young",
-    image: "https://cdn2.thecatapi.com/images/MTY3ODI1MQ.jpg"
+    image: "https://images.unsplash.com/photo-1529778873920-4da4926a72c2?w=400"
   },
   {
     name: "Misty",
     type: "Cat",
     age: "Senior",
-    image: "https://cdn2.thecatapi.com/images/MTY3ODI1NA.jpg"
+    image: "https://images.unsplash.com/photo-1508675801627-066ac4346a8d?w=400"
   },
   {
     name: "Pepper",
     type: "Cat",
     age: "Adult",
-    image: "https://cdn2.thecatapi.com/images/MTY3ODI1Nw.jpg"
+    image: "https://images.unsplash.com/photo-1571566882372-1598d88abd90?w=400"
   },
   {
     name: "Snowball",
     type: "Cat",
     age: "Baby",
-    image: "https://cdn2.thecatapi.com/images/MTY3ODI2MA.jpg"
+    image: "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=400"
   },
   {
     name: "Tiger",
     type: "Cat",
     age: "Senior",
-    image: "https://cdn2.thecatapi.com/imag
+    image: "https://images.unsplash.com/photo-1519052537078-e6302a4968d4?w=400"
+  }
+];
 

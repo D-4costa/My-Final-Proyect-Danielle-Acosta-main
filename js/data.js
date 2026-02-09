@@ -4,91 +4,91 @@ export const animals = [
     name: "Luna",
     type: "Dog",
     age: "Young",
-    image: "https://placedog.net/400/300?id=1"
+    image: "https://picsum.photos/seed/dog1/400/300"
   },
   {
     name: "Max",
     type: "Dog",
     age: "Adult",
-    image: "https://placedog.net/400/300?id=2"
+    image: "https://picsum.photos/seed/dog2/400/300"
   },
   {
     name: "Rocky",
     type: "Dog",
     age: "Young",
-    image: "https://placedog.net/400/301?id=3"
+    image: "https://picsum.photos/seed/dog3/400/300"
   },
   {
     name: "Lucy",
     type: "Dog",
     age: "Baby",
-    image: "https://placedog.net/401/300?id=4"
+    image: "https://picsum.photos/seed/dog4/400/300"
   },
   {
     name: "Buddy",
     type: "Dog",
     age: "Senior",
-    image: "https://placedog.net/402/300?id=5"
+    image: "https://picsum.photos/seed/dog5/400/300"
   },
   {
     name: "Charlie",
     type: "Dog",
     age: "Adult",
-    image: "https://placedog.net/403/300?id=6"
+    image: "https://picsum.photos/seed/dog6/400/300"
   },
   {
     name: "Daisy",
     type: "Dog",
     age: "Baby",
-    image: "https://placedog.net/404/300?id=7"
+    image: "https://picsum.photos/seed/dog7/400/300"
   },
   {
     name: "Toby",
     type: "Dog",
     age: "Senior",
-    image: "https://placedog.net/405/300?id=8"
+    image: "https://picsum.photos/seed/dog8/400/300"
   },
   {
     name: "Cooper",
     type: "Dog",
     age: "Young",
-    image: "https://placedog.net/406/300?id=9"
+    image: "https://picsum.photos/seed/dog9/400/300"
   },
   {
     name: "Molly",
     type: "Dog",
     age: "Adult",
-    image: "https://placedog.net/407/300?id=10"
+    image: "https://picsum.photos/seed/dog10/400/300"
   },
   {
     name: "Bear",
     type: "Dog",
     age: "Senior",
-    image: "https://placedog.net/408/300?id=11"
+    image: "https://picsum.photos/seed/dog11/400/300"
   },
   {
     name: "Bailey",
     type: "Dog",
     age: "Baby",
-    image: "https://placedog.net/409/300?id=12"
+    image: "https://picsum.photos/seed/dog12/400/300"
   },
   {
     name: "Zeus",
     type: "Dog",
     age: "Adult",
-    image: "https://placedog.net/410/300?id=13"
+    image: "https://picsum.photos/seed/dog13/400/300"
   },
   {
     name: "Bruno",
     type: "Dog",
     age: "Young",
-    image: "https://placedog.net/411/300?id=14"
+    image: "https://picsum.photos/seed/dog14/400/300"
   },
   {
     name: "Shadow",
     type: "Dog",
     age: "Senior",
-    image: "https://placedog.net/412/300?id=15"
+    image: "https://picsum.photos/seed/dog15/400/300"
   },
 
   // 🐱 Cats
@@ -183,3 +183,4 @@ export const animals = [
     image: "https://placekitten.com/414/300"
   }
 ];
+

@@ -102,7 +102,7 @@ export const animals = [
   name: "Oliver",
   type: "Cat",
   age: "Adult",
-  image: "https://cataas.com/cat?type=or&width=401&height=300"
+  image: "https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2F0fGVufDB8fDB8fHww"
 },
 {
   name: "Milo",
@@ -132,7 +132,7 @@ export const animals = [
   name: "Simba",
   type: "Cat",
   age: "Young",
-  image: "https://cataas.com/cat?type=or&width=406&height=300"
+  image: "https://images.unsplash.com/photo-1519052537078-e6302a4968d4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2F0fGVufDB8fDB8fHww"
 },
 {
   name: "Loki",

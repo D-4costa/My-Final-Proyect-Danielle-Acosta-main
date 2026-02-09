@@ -1,53 +1,51 @@
 import { animals } from "./data.js";
+import { saveFavorite } from "./utils/storage.js";
 
-const animalsContainer = document.getElementById("animals");
+const container = document.getElementById("animals");
 const status = document.getElementById("status");
 const typeFilter = document.getElementById("typeFilter");
 const ageFilter = document.getElementById("ageFilter");
 
-function displayAnimals(list) {
-  animalsContainer.innerHTML = "";
+function render(list) {
+  container.innerHTML = "";
 
   if (list.length === 0) {
     status.textContent = "No animals found 😿";
     return;
-  } 
+  }
 
   status.textContent = "";
 
-  list.forEach(animal => {
+  list.forEach(a => {
     const card = document.createElement("div");
     card.className = "card";
 
     card.innerHTML = `
-      <img src="${animal.image}" alt="${animal.name}">
-      <h3>${animal.name}</h3>
-      <p>${animal.type} • ${animal.age}</p>
-      <button>Add to Favorites</button>
+      <img src="${a.photo}" alt="${a.name}">
+      <h3>${a.name}</h3>
+      <p>${a.type} • ${a.age}</p>
+      <div class="card-buttons">
+        <a href="animal.html?id=${a.id}">Details</a>
+        <button>❤️</button>
+      </div>
     `;
 
-    animalsContainer.appendChild(card);
+    card.querySelector("button").onclick = () => saveFavorite(a);
+    container.appendChild(card);
   });
 }
 
 function applyFilters() {
-  let filtered = animals;
+  let result = animals;
 
-  if (typeFilter.value) {
-    filtered = filtered.filter(a => a.type === typeFilter.value);
-  }
+  if (typeFilter.value) result = result.filter(a => a.type === typeFilter.value);
+  if (ageFilter.value) result = result.filter(a => a.age === ageFilter.value);
 
-  if (ageFilter.value) {
-    filtered = filtered.filter(a => a.age === ageFilter.value);
-  }
-
-  displayAnimals(filtered);
+  render(result);
 }
 
-// EVENTS
-typeFilter.addEventListener("change", applyFilters);
-ageFilter.addEventListener("change", applyFilters);
+typeFilter.onchange = applyFilters;
+ageFilter.onchange = applyFilters;
 
-// INIT
 status.textContent = "Showing adoptable animals 🐾";
-displayAnimals(animals);
+render(animals);

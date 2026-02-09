@@ -84,32 +84,32 @@ export const animals = [
     age: "Young",
     image: "https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?w=400"
   },
-  {
-    name: "Shadow",
-    type: "Dog",
-    age: "Senior",
-    image: "https://images.unsplash.com/photo-1507149833265-60c372daea22?w=400"
-  },
+{
+  name: "Shadow",
+  type: "Dog",
+  age: "Senior",
+  image: "https://source.unsplash.com/400x300/?senior-dog"
+},
 
   // 🐱 Cats
-  {
-    name: "Bella",
-    type: "Cat",
-    age: "Baby",
-    image: "https://images.unsplash.com/photo-1595433562696-19d0c6c0f9e6?w=400"
-  },
+{
+  name: "Bella",
+  type: "Cat",
+  age: "Baby",
+  image: "https://source.unsplash.com/400x300/?kitten"
+},
   {
     name: "Oliver",
     type: "Cat",
     age: "Adult",
     image: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=400"
   },
-  {
-    name: "Milo",
-    type: "Cat",
-    age: "Young",
-    image: "https://images.unsplash.com/photo-1606225457115-9b0c6f2a5996?w=400"
-  },
+{
+  name: "Milo",
+  type: "Cat",
+  age: "Young",
+  image: "https://source.unsplash.com/400x300/?young-cat"
+},
   {
     name: "Chloe",
     type: "Cat",
@@ -140,12 +140,12 @@ export const animals = [
     age: "Senior",
     image: "https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=400"
   },
-  {
-    name: "Cleo",
-    type: "Cat",
-    age: "Adult",
-    image: "https://images.unsplash.com/photo-1516972810927-80185027ca84?w=400"
-  },
+{
+  name: "Cleo",
+  type: "Cat",
+  age: "Adult",
+  image: "https://source.unsplash.com/400x300/?adult-cat"
+},
   {
     name: "Kitty",
     type: "Cat",
@@ -158,12 +158,12 @@ export const animals = [
     age: "Young",
     image: "https://images.unsplash.com/photo-1529778873920-4da4926a72c2?w=400"
   },
-  {
-    name: "Misty",
-    type: "Cat",
-    age: "Senior",
-    image: "https://images.unsplash.com/photo-1508675801627-066ac4346a8d?w=400"
-  },
+{
+  name: "Misty",
+  type: "Cat",
+  age: "Senior",
+  image: "https://source.unsplash.com/400x300/?senior-cat"
+},
   {
     name: "Pepper",
     type: "Cat",

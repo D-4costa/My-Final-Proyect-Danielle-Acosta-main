@@ -2,42 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Animal Adoption Center</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Animal Search & Adoption</title>
-  <meta name="description" content="Search and filter adoptable animals">
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Open+Sans&display=swap" rel="stylesheet">
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="./css/styles.css">
-  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
-
 <body>
 
 <header class="header">
   <h1>🐾 Animal Adoption Center</h1>
   <nav>
-    <a href="./index.html">Search</a>
-    <a href="./favorites.html">Favorites</a>
+    <a href="index.html">Home</a>
+    <a href="favorites.html">Favorites ❤️</a>
   </nav>
 </header>
 
 <main class="layout">
 
-  <aside class="filters" aria-label="Animal filters">
+  <aside class="filters">
     <h2>Filters</h2>
 
     <label>
       Type
       <select id="typeFilter">
         <option value="">All</option>
-        <option value="Dog">Dog</option>
-        <option value="Cat">Cat</option>
+        <option>Dog</option>
+        <option>Cat</option>
+        <option>Rabbit</option>
+        <option>Bird</option>
+        <option>Reptile</option>
       </select>
     </label>
 
@@ -45,28 +39,22 @@
       Age
       <select id="ageFilter">
         <option value="">All</option>
-        <option value="Baby">Baby</option>
-        <option value="Young">Young</option>
-        <option value="Adult">Adult</option>
+        <option>Baby</option>
+        <option>Young</option>
+        <option>Adult</option>
+        <option>Senior</option>
       </select>
     </label>
   </aside>
 
-  <section>
-    <p id="status" class="status" role="status">
-      Loading animals...
-    </p>
-
+  <section class="content">
+    <p id="status"></p>
     <div id="animals" class="grid"></div>
   </section>
 
 </main>
 
-<footer class="footer">
-  © 2026 — Danielle Acosta 💚
-</footer>
-
-<script type="module" src="./js/main.js"></script>
-
+<script type="module" src="js/main.js"></script>
 </body>
 </html>
+

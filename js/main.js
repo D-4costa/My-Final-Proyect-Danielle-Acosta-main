@@ -10,16 +10,45 @@ const ageFilter = document.getElementById("ageFilter");
 
 let animals = [];
 
+/* ---------------- RANDOM DATA GENERATOR ---------------- */
+
+const names = [
+  "Luna","Max","Bella","Charlie","Rocky","Milo","Simba","Coco",
+  "Nala","Toby","Leo","Daisy","Zeus","Shadow","Kiara","Oreo"
+];
+
+const ages = ["Baby","Young","Adult","Senior"];
+const personalities = ["Playful","Calm","Loyal","Shy","Energetic","Friendly"];
+const energyLevels = ["Low","Medium","High"];
+
+function random(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function buildAnimal(img, type, index) {
+  return {
+    id: `${type}-${index}-${Date.now()}`,
+    name: random(names),
+    image: img,
+    type,
+    age: random(ages),
+    personality: random(personalities),
+    energy: random(energyLevels)
+  };
+}
+
 /* ---------------- LOAD ANIMALS ---------------- */
 
 async function loadAnimals() {
   try {
     status.textContent = "Loading animals...";
 
-    const dogs = await fetchDogs();
-    const cats = await fetchCats();
+    const dogImgs = await fetchDogs();
+    const catImgs = await fetchCats();
 
-    // unir todos
+    const dogs = dogImgs.map((d, i) => buildAnimal(d, "Dog", i));
+    const cats = catImgs.map((c, i) => buildAnimal(c, "Cat", i));
+
     animals = [...dogs, ...cats];
 
     status.textContent = `Loaded ${animals.length} pets 🐾`;
@@ -27,12 +56,12 @@ async function loadAnimals() {
     render(animals);
 
   } catch (error) {
-    console.error("Error loading animals:", error);
+    console.error(error);
     status.textContent = "Failed to load animals ❌";
   }
 }
 
-/* ---------------- RENDER CARDS ---------------- */
+/* ---------------- RENDER ---------------- */
 
 function render(list) {
   container.innerHTML = "";
@@ -43,7 +72,6 @@ function render(list) {
   }
 
   list.forEach(animal => {
-
     const card = document.createElement("div");
     card.className = "card fade-in";
 
@@ -59,18 +87,19 @@ function render(list) {
       </div>
     `;
 
-    /* FAVORITE */
+    /* FAVORITES */
     card.querySelector(".fav").addEventListener("click", () => {
       saveFavorite(animal);
+      card.querySelector(".fav").textContent = "💖";
     });
 
     /* DETAILS */
     card.querySelector(".details").addEventListener("click", () => {
       saveLastViewed(animal);
-      window.location.href = `animal.html?id=${animal.id}`;
+      window.location = `animal.html?id=${animal.id}`;
     });
 
-    /* HOVER ANIMATION */
+    /* HOVER EVENTS */
     card.addEventListener("mouseenter", () => card.classList.add("hover"));
     card.addEventListener("mouseleave", () => card.classList.remove("hover"));
 
@@ -81,8 +110,7 @@ function render(list) {
 /* ---------------- FILTERS ---------------- */
 
 function applyFilters() {
-
-  let filtered = [...animals];
+  let filtered = animals;
 
   if (typeFilter.value)
     filtered = filtered.filter(a => a.type === typeFilter.value);
@@ -105,12 +133,5 @@ typeFilter.addEventListener("change", applyFilters);
 ageFilter.addEventListener("change", applyFilters);
 
 window.addEventListener("load", loadAnimals);
-
-window.addEventListener("offline", () => {
-  status.textContent = "Offline mode ⚠";
-});
-
-window.addEventListener("online", () => {
-  status.textContent = "Back online ✅";
-});
-
+window.addEventListener("offline", () => status.textContent = "Offline mode ⚠");
+window.addEventListener("online", () => status.textContent = "Back online ✅");

@@ -1,3 +1,5 @@
+import { getPetName } from "../utils/petNames.js";
+
 const CAT_API = "https://api.thecatapi.com/v1/images/search?limit=12";
 
 export async function fetchCats() {
@@ -5,9 +7,9 @@ export async function fetchCats() {
     const res = await fetch(CAT_API);
     const data = await res.json();
 
-    return data.map((cat, index) => ({
-      id: "cat-" + index,
-      name: `Cat ${index + 1}`,
+    return data.map((cat) => ({
+      id: "cat-" + cat.id, 
+      name: getPetName("Cat", cat.id), 
       type: "Cat",
       age: randomAge(),
       energy: randomEnergy(),

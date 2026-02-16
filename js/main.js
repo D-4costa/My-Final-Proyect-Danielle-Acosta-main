@@ -1,6 +1,6 @@
 import { fetchDogs } from "./api/dogApi.js";
 import { fetchCats } from "./api/catApi.js";
-import { saveFavorite, saveLastViewed } from "./utils/storage.js";
+import { saveFavorite, saveLastViewed, isFavorite } from "./utils/storage.js";
 
 const container = document.getElementById("animals");
 const status = document.getElementById("status");

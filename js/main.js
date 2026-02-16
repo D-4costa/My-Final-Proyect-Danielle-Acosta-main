@@ -1,62 +1,98 @@
-import { animals } from "./data.js";
-import { saveFavorite } from "./utils/storage.js";
+import { fetchDogs } from "./api/dogApi.js";
+import { fetchCats } from "./api/catApi.js";
+import { saveFavorite, saveLastViewed } from "./utils/storage.js";
 
 const container = document.getElementById("animals");
 const status = document.getElementById("status");
+const search = document.getElementById("search");
 const typeFilter = document.getElementById("typeFilter");
 const ageFilter = document.getElementById("ageFilter");
+
+let animals = [];
+
+/* ---------------- LOAD DATA ---------------- */
+
+async function loadAnimals() {
+  status.textContent = "Loading animals...";
+
+  const dogs = await fetchDogs();
+  const cats = await fetchCats();
+
+  animals = [...dogs, ...cats];
+
+  status.textContent = `Loaded ${animals.length} pets 🐾`;
+  render(animals);
+}
+
+/* ---------------- RENDER ---------------- */
 
 function render(list) {
   container.innerHTML = "";
 
-  if (list.length === 0) {
-    status.textContent = "No animals found 😿";
+  if (!list.length) {
+    status.textContent = "No matches 😿";
     return;
   }
 
-  status.textContent = "";
-
-  list.forEach(a => {
+  list.forEach(animal => {
     const card = document.createElement("div");
-    card.className = "card";
+    card.className = "card fade-in";
 
     card.innerHTML = `
-      <img src="${a.image}" alt="${a.name}">
-      <h3>${a.name}</h3>
-      <p>${a.type} • ${a.age}</p>
+      <img src="${animal.image}" alt="${animal.name}">
+      <h3>${animal.name}</h3>
+      <p>${animal.type} • ${animal.age}</p>
+      <p class="traits">${animal.personality} • ${animal.energy} energy</p>
+
       <div class="card-buttons">
-        <a href="animal.html?name=${encodeURIComponent(a.name)}">Details</a>
-        <button>❤️</button>
+        <button class="details">Details</button>
+        <button class="fav">❤️</button>
       </div>
     `;
 
-    // fallback por si una imagen falla
-    const img = card.querySelector("img");
-    img.onerror = () => {
-      img.src = "https://picsum.photos/400/300";
-    };
+    /* EVENTS (many required) */
 
-    card.querySelector("button").onclick = () => saveFavorite(a);
+    card.querySelector(".fav").addEventListener("click", () => {
+      saveFavorite(animal);
+    });
+
+    card.querySelector(".details").addEventListener("click", () => {
+      saveLastViewed(animal);
+      window.location = `animal.html?id=${animal.id}`;
+    });
+
+    card.addEventListener("mouseenter", () => card.classList.add("hover"));
+    card.addEventListener("mouseleave", () => card.classList.remove("hover"));
+
     container.appendChild(card);
   });
 }
 
+/* ---------------- FILTERS ---------------- */
+
 function applyFilters() {
-  let result = animals;
+  let filtered = animals;
 
-  if (typeFilter.value) {
-    result = result.filter(a => a.type === typeFilter.value);
-  }
+  if (typeFilter.value)
+    filtered = filtered.filter(a => a.type === typeFilter.value);
 
-  if (ageFilter.value) {
-    result = result.filter(a => a.age === ageFilter.value);
-  }
+  if (ageFilter.value)
+    filtered = filtered.filter(a => a.age === ageFilter.value);
 
-  render(result);
+  if (search.value)
+    filtered = filtered.filter(a =>
+      a.name.toLowerCase().includes(search.value.toLowerCase())
+    );
+
+  render(filtered);
 }
 
-typeFilter.onchange = applyFilters;
-ageFilter.onchange = applyFilters;
+/* ---------------- EVENTS ---------------- */
 
-status.textContent = "Showing adoptable animals 🐾";
-render(animals);
+search.addEventListener("input", applyFilters);
+typeFilter.addEventListener("change", applyFilters);
+ageFilter.addEventListener("change", applyFilters);
+window.addEventListener("load", loadAnimals);
+window.addEventListener("offline", () => status.textContent = "Offline mode ⚠");
+window.addEventListener("online", () => status.textContent = "Back online ✅");
+

@@ -1,23 +1,20 @@
-const dogNames = [
-  "Max","Charlie","Cooper","Buddy","Rocky","Bear","Duke","Toby",
-  "Tucker","Jake","Zeus","Leo","Milo","Bentley","Ollie","Jasper",
-  "Finn","Louie","Gus","Murphy","Winston","Sam","Henry","Oscar"
+// js/petnames.js
+
+export const dogNames = [
+  "Max", "Luna", "Rocky", "Milo", "Toby",
+  "Bella", "Daisy", "Simba", "Coco", "Zeus",
+  "Nala", "Thor", "Bobby", "Kira", "Bruno",
+  "Rex", "Oreo", "Leo", "Chester", "Lucky"
 ];
 
-const catNames = [
-  "Luna","Bella","Kitty","Lily","Nala","Chloe","Cleo","Mochi",
-  "Simba","Milo","Leo","Oreo","Shadow","Pumpkin","Jasper","Smokey",
-  "Willow","Tiger","Coco","Pepper","Zoe","Mimi","Poppy","Binx"
+export const catNames = [
+  "Misty", "Oliver", "Kitty", "Shadow", "Loki",
+  "Simba", "Nina", "Salem", "Pumpkin", "Mochi",
+  "Felix", "Tom", "Garfield", "Kiwi", "Snowball",
+  "Luna", "Milo", "Chloe", "Pepper", "Sushi"
 ];
 
-function hash(str){
-  let h = 0;
-  for(let i=0;i<str.length;i++)
-    h = str.charCodeAt(i) + ((h<<5)-h);
-  return Math.abs(h);
-}
-
-export function getPetName(type, seed){
-  const list = type === "Dog" ? dogNames : catNames;
-  return list[hash(seed) % list.length];
+// función util para elegir nombre aleatorio
+export function getRandomName(list) {
+  return list[Math.floor(Math.random() * list.length)];
 }

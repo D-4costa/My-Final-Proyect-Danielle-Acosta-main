@@ -1,30 +1,42 @@
-import { getFavorites } from './utils/storage.js';
+import { getFavorites, toggleFavorite } from "./utils/storage.js";
 
-const container = document.getElementById('favorites');
+const container = document.getElementById("favorites");
 
-function init() {
-  const favs = getFavorites();
-
+function renderFavorites() {
   container.innerHTML = "";
+  const favs = getFavorites();
 
   if (!favs.length) {
     container.innerHTML = "<p>No favorites yet 🐾</p>";
     return;
   }
 
-  favs.forEach(a => {
+  favs.forEach(animal => {
+
     const card = document.createElement("div");
     card.className = "card";
 
-    card.innerHTML = `
-      <img src="${a.image}" alt="${a.name}">
-      <h3>${a.name}</h3>
-      <p>${a.type} • ${a.age}</p>
-      <p class="traits">${a.personality} • ${a.energy} energy</p>
-    `;
+    const img = document.createElement("img");
+    img.src = animal.image;
+    img.alt = animal.name;
 
+    const title = document.createElement("h3");
+    title.textContent = animal.name;
+
+    const info = document.createElement("p");
+    info.textContent = `${animal.type} • ${animal.age}`;
+
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "💔 Remove";
+
+    removeBtn.addEventListener("click", () => {
+      toggleFavorite(animal);
+      renderFavorites();
+    });
+
+    card.append(img, title, info, removeBtn);
     container.appendChild(card);
   });
 }
 
-init();
+window.addEventListener("load", renderFavorites);

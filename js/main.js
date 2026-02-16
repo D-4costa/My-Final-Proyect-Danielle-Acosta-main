@@ -19,7 +19,6 @@ async function loadAnimals() {
     const dogs = await fetchDogs();
     const cats = await fetchCats();
 
-    // 🔥 NO reconstruir datos
     animals = [...dogs, ...cats];
 
     status.textContent = `Loaded ${animals.length} pets 🐾`;
@@ -50,50 +49,74 @@ function render(list) {
     const img = document.createElement("img");
     img.src = animal.image;
     img.alt = animal.name;
-
-    img.onerror = () => {
+    img.onerror = () =>
       img.src = "https://cdn-icons-png.flaticon.com/512/616/616408.png";
-    };
 
-    const favIcon = document.createElement("button");
-    favIcon.className = "fav";
-    favIcon.textContent = isFavorite(animal.id) ? "💖" : "❤️";
+    const title = document.createElement("h3");
+    title.textContent = animal.name;
 
-    const detailsBtn = document.createElement("button");
-    detailsBtn.className = "details";
-    detailsBtn.textContent = "Details";
+    const info = document.createElement("p");
+    info.textContent = `${animal.type} • ${animal.age}`;
 
-    card.appendChild(img);
-
-    card.innerHTML += `
-      <h3>${animal.name}</h3>
-      <p>${animal.type} • ${animal.age}</p>
-      <p class="traits">${animal.personality} • ${animal.energy} energy</p>
-    `;
+    const traits = document.createElement("p");
+    traits.className = "traits";
+    traits.textContent = `${animal.personality} • ${animal.energy} energy`;
 
     const btnBox = document.createElement("div");
     btnBox.className = "card-buttons";
 
-    btnBox.appendChild(detailsBtn);
-    btnBox.appendChild(favIcon);
-    card.appendChild(btnBox);
+    const detailsBtn = document.createElement("button");
+    detailsBtn.textContent = "Details";
 
-    /* FAVORITE */
-    favIcon.addEventListener("click", () => {
+    const favBtn = document.createElement("button");
+    favBtn.textContent = isFavorite(animal.id) ? "💖" : "❤️";
+
+    /* EVENTS */
+
+    favBtn.addEventListener("click", () => {
       saveFavorite(animal);
-      favIcon.textContent = "💖";
+      favBtn.textContent = "💖";
     });
 
-    /* DETAILS */
     detailsBtn.addEventListener("click", () => {
       saveLastViewed(animal);
       window.location = "animal.html";
     });
 
-    /* HOVER */
     card.addEventListener("mouseenter", () => card.classList.add("hover"));
     card.addEventListener("mouseleave", () => card.classList.remove("hover"));
 
+    btnBox.append(detailsBtn, favBtn);
+    card.append(img, title, info, traits, btnBox);
     container.appendChild(card);
   });
 }
+
+/* ---------------- FILTERS ---------------- */
+
+function applyFilters() {
+  let filtered = [...animals];
+
+  if (typeFilter.value)
+    filtered = filtered.filter(a => a.type === typeFilter.value);
+
+  if (ageFilter.value)
+    filtered = filtered.filter(a => a.age === ageFilter.value);
+
+  if (search.value)
+    filtered = filtered.filter(a =>
+      a.name.toLowerCase().includes(search.value.toLowerCase())
+    );
+
+  render(filtered);
+}
+
+/* ---------------- EVENTS ---------------- */
+
+search.addEventListener("input", applyFilters);
+typeFilter.addEventListener("change", applyFilters);
+ageFilter.addEventListener("change", applyFilters);
+window.addEventListener("load", loadAnimals);
+window.addEventListener("offline", () => status.textContent = "Offline mode ⚠");
+window.addEventListener("online", () => status.textContent = "Back online ✅");
+

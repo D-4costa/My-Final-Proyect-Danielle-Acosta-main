@@ -1,22 +1,30 @@
 import { getFavorites } from './utils/storage.js';
-import { animalCard } from './components/animalCard.js';
 
 const container = document.getElementById('favorites');
-const status = document.getElementById('status');
 
 function init() {
   const favs = getFavorites();
 
+  container.innerHTML = "";
+
   if (!favs.length) {
-    status.textContent = "No favorites yet 💔";
+    container.innerHTML = "<p>No favorites yet 🐾</p>";
     return;
   }
 
-  status.textContent = `You have ${favs.length} favorites ❤️`;
+  favs.forEach(a => {
+    const card = document.createElement("div");
+    card.className = "card";
 
-  favs.forEach(animal => {
-    container.appendChild(animalCard(animal));
+    card.innerHTML = `
+      <img src="${a.image}" alt="${a.name}">
+      <h3>${a.name}</h3>
+      <p>${a.type} • ${a.age}</p>
+      <p class="traits">${a.personality} • ${a.energy} energy</p>
+    `;
+
+    container.appendChild(card);
   });
 }
 
-window.addEventListener("load", init);
+init();

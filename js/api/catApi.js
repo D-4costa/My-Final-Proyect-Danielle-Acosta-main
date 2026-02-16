@@ -11,8 +11,8 @@ export async function fetchCats() {
       type: "Cat",
       age: randomAge(),
       energy: randomEnergy(),
-      size: "Small",
-      image: cat.url,
+      size: randomSize(),
+      image: cat.url, // 🔥 IMPORTANTE
       personality: randomPersonality()
     }));
 
@@ -30,6 +30,10 @@ function randomEnergy() {
   return ["Low","Medium","High"][Math.floor(Math.random()*3)];
 }
 
+function randomSize() {
+  return ["Small","Medium","Large"][Math.floor(Math.random()*3)];
+}
+
 function randomPersonality() {
-  return ["Independent","Lazy","Cuddly","Curious","Chaotic"][Math.floor(Math.random()*5)];
+  return ["Friendly","Calm","Playful","Shy","Curious"][Math.floor(Math.random()*5)];
 }

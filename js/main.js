@@ -10,45 +10,16 @@ const ageFilter = document.getElementById("ageFilter");
 
 let animals = [];
 
-/* ---------------- RANDOM DATA GENERATOR ---------------- */
-
-const names = [
-  "Luna","Max","Bella","Charlie","Rocky","Milo","Simba","Coco",
-  "Nala","Toby","Leo","Daisy","Zeus","Shadow","Kiara","Oreo"
-];
-
-const ages = ["Baby","Young","Adult","Senior"];
-const personalities = ["Playful","Calm","Loyal","Shy","Energetic","Friendly"];
-const energyLevels = ["Low","Medium","High"];
-
-function random(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
-
-function buildAnimal(img, type, index) {
-  return {
-    id: `${type}-${index}-${Date.now()}`,
-    name: random(names),
-    image: img,
-    type,
-    age: random(ages),
-    personality: random(personalities),
-    energy: random(energyLevels)
-  };
-}
-
-/* ---------------- LOAD ANIMALS ---------------- */
+/* ---------------- LOAD DATA ---------------- */
 
 async function loadAnimals() {
   try {
     status.textContent = "Loading animals...";
 
-    const dogImgs = await fetchDogs();
-    const catImgs = await fetchCats();
+    const dogs = await fetchDogs();
+    const cats = await fetchCats();
 
-    const dogs = dogImgs.map((d, i) => buildAnimal(d, "Dog", i));
-    const cats = catImgs.map((c, i) => buildAnimal(c, "Cat", i));
-
+    // 🔥 NO reconstruir datos
     animals = [...dogs, ...cats];
 
     status.textContent = `Loaded ${animals.length} pets 🐾`;
@@ -72,11 +43,22 @@ function render(list) {
   }
 
   list.forEach(animal => {
+
     const card = document.createElement("div");
     card.className = "card fade-in";
 
-    card.innerHTML = `
-      <img src="${animal.image}" alt="${animal.name}">
+    const img = document.createElement("img");
+    img.src = animal.image;
+    img.alt = animal.name;
+
+    // fallback si la imagen falla
+    img.onerror = () => {
+      img.src = "https://cdn-icons-png.flaticon.com/512/616/616408.png";
+    };
+
+    card.appendChild(img);
+
+    card.innerHTML += `
       <h3>${animal.name}</h3>
       <p>${animal.type} • ${animal.age}</p>
       <p class="traits">${animal.personality} • ${animal.energy} energy</p>
@@ -110,7 +92,7 @@ function render(list) {
 /* ---------------- FILTERS ---------------- */
 
 function applyFilters() {
-  let filtered = animals;
+  let filtered = [...animals];
 
   if (typeFilter.value)
     filtered = filtered.filter(a => a.type === typeFilter.value);
@@ -135,3 +117,4 @@ ageFilter.addEventListener("change", applyFilters);
 window.addEventListener("load", loadAnimals);
 window.addEventListener("offline", () => status.textContent = "Offline mode ⚠");
 window.addEventListener("online", () => status.textContent = "Back online ✅");
+

@@ -10,21 +10,29 @@ const ageFilter = document.getElementById("ageFilter");
 
 let animals = [];
 
-/* ---------------- LOAD DATA ---------------- */
+/* ---------------- LOAD ANIMALS ---------------- */
 
 async function loadAnimals() {
-  status.textContent = "Loading animals...";
+  try {
+    status.textContent = "Loading animals...";
 
-  const dogs = await fetchDogs();
-  const cats = await fetchCats();
+    const dogs = await fetchDogs();
+    const cats = await fetchCats();
 
-  animals = [...dogs, ...cats];
+    // unir todos
+    animals = [...dogs, ...cats];
 
-  status.textContent = `Loaded ${animals.length} pets 🐾`;
-  render(animals);
+    status.textContent = `Loaded ${animals.length} pets 🐾`;
+
+    render(animals);
+
+  } catch (error) {
+    console.error("Error loading animals:", error);
+    status.textContent = "Failed to load animals ❌";
+  }
 }
 
-/* ---------------- RENDER ---------------- */
+/* ---------------- RENDER CARDS ---------------- */
 
 function render(list) {
   container.innerHTML = "";
@@ -35,6 +43,7 @@ function render(list) {
   }
 
   list.forEach(animal => {
+
     const card = document.createElement("div");
     card.className = "card fade-in";
 
@@ -50,17 +59,18 @@ function render(list) {
       </div>
     `;
 
-    /* EVENTS (many required) */
-
+    /* FAVORITE */
     card.querySelector(".fav").addEventListener("click", () => {
       saveFavorite(animal);
     });
 
+    /* DETAILS */
     card.querySelector(".details").addEventListener("click", () => {
       saveLastViewed(animal);
-      window.location = `animal.html?id=${animal.id}`;
+      window.location.href = `animal.html?id=${animal.id}`;
     });
 
+    /* HOVER ANIMATION */
     card.addEventListener("mouseenter", () => card.classList.add("hover"));
     card.addEventListener("mouseleave", () => card.classList.remove("hover"));
 
@@ -71,7 +81,8 @@ function render(list) {
 /* ---------------- FILTERS ---------------- */
 
 function applyFilters() {
-  let filtered = animals;
+
+  let filtered = [...animals];
 
   if (typeFilter.value)
     filtered = filtered.filter(a => a.type === typeFilter.value);
@@ -92,7 +103,14 @@ function applyFilters() {
 search.addEventListener("input", applyFilters);
 typeFilter.addEventListener("change", applyFilters);
 ageFilter.addEventListener("change", applyFilters);
+
 window.addEventListener("load", loadAnimals);
-window.addEventListener("offline", () => status.textContent = "Offline mode ⚠");
-window.addEventListener("online", () => status.textContent = "Back online ✅");
+
+window.addEventListener("offline", () => {
+  status.textContent = "Offline mode ⚠";
+});
+
+window.addEventListener("online", () => {
+  status.textContent = "Back online ✅";
+});
 

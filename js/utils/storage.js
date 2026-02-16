@@ -11,10 +11,12 @@ export function isFavorite(id) {
   return getFavorites().some(a => a.id === id);
 }
 
-export function saveFavorite(animal) {
+export function toggleFavorite(animal) {
   let favs = getFavorites();
 
-  if (!favs.some(a => a.id === animal.id)) {
+  if (isFavorite(animal.id)) {
+    favs = favs.filter(a => a.id !== animal.id);
+  } else {
     favs.push(animal);
   }
 
@@ -30,5 +32,3 @@ export function saveLastViewed(animal) {
 export function getLastViewed() {
   return JSON.parse(localStorage.getItem(LAST_KEY));
 }
-
-

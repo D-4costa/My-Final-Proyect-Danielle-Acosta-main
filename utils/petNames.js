@@ -13,13 +13,11 @@ const catNames = [
 export function getRandomName(type, id) {
   const list = type === "Dog" ? dogNames : catNames;
 
-  // usar id como seed → SIEMPRE MISMO NOMBRE PARA MISMO ANIMAL
   const index = hashCode(id.toString()) % list.length;
 
   return list[Math.abs(index)];
 }
 
-/* convierte string en numero consistente */
 function hashCode(str) {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {

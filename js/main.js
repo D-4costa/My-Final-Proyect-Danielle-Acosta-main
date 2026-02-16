@@ -2,123 +2,132 @@ import { fetchDogs } from "./api/dogApi.js";
 import { fetchCats } from "./api/catApi.js";
 import { toggleFavorite, saveLastViewed, isFavorite } from "./utils/storage.js";
 
-const container = document.getElementById("animals");
-const status = document.getElementById("status");
-const search = document.getElementById("search");
-const typeFilter = document.getElementById("typeFilter");
-const ageFilter = document.getElementById("ageFilter");
-
 let animals = [];
 
-/* ---------------- LOAD DATA ---------------- */
+/* ---------------- INIT ---------------- */
 
-async function loadAnimals() {
-  try {
-    status.textContent = "Loading animals...";
+async function init() {
 
-    const dogs = await fetchDogs();
-    const cats = await fetchCats();
+  const container = document.getElementById("animals");
+  const status = document.getElementById("status");
+  const search = document.getElementById("search");
+  const typeFilter = document.getElementById("typeFilter");
+  const ageFilter = document.getElementById("ageFilter");
 
-    animals = [...dogs, ...cats];
+  if (!container) return; // evita romper otras páginas
 
-    status.textContent = `Loaded ${animals.length} pets 🐾`;
+  /* ---------------- LOAD DATA ---------------- */
 
-    render(animals);
+  async function loadAnimals() {
+    try {
+      status.textContent = "Loading animals...";
 
-  } catch (error) {
-    console.error(error);
-    status.textContent = "Failed to load animals ❌";
+      const dogs = await fetchDogs();
+      const cats = await fetchCats();
+
+      animals = [...dogs, ...cats];
+
+      status.textContent = `Loaded ${animals.length} pets 🐾`;
+      render(animals);
+
+    } catch (error) {
+      console.error(error);
+      status.textContent = "Failed to load animals ❌";
+    }
   }
-}
 
-/* ---------------- RENDER ---------------- */
+  /* ---------------- RENDER ---------------- */
 
-function render(list) {
-  container.innerHTML = "";
+  function render(list) {
+    container.innerHTML = "";
 
-  if (!list.length) {
-    status.textContent = "No matches 😿";
-    return;
-  }
+    if (!list.length) {
+      status.textContent = "No matches 😿";
+      return;
+    }
 
-  list.forEach(animal => {
+    list.forEach(animal => {
 
-    const card = document.createElement("div");
-    card.className = "card fade-in";
+      const card = document.createElement("div");
+      card.className = "card fade-in";
 
-    const img = document.createElement("img");
-    img.src = animal.image;
-    img.alt = animal.name;
-    img.onerror = () =>
-      img.src = "https://cdn-icons-png.flaticon.com/512/616/616408.png";
+      const img = document.createElement("img");
+      img.src = animal.image;
+      img.alt = animal.name;
+      img.onerror = () =>
+        img.src = "https://cdn-icons-png.flaticon.com/512/616/616408.png";
 
-    const title = document.createElement("h3");
-    title.textContent = animal.name;
+      const title = document.createElement("h3");
+      title.textContent = animal.name;
 
-    const info = document.createElement("p");
-    info.textContent = `${animal.type} • ${animal.age}`;
+      const info = document.createElement("p");
+      info.textContent = `${animal.type} • ${animal.age}`;
 
-    const traits = document.createElement("p");
-    traits.className = "traits";
-    traits.textContent = `${animal.personality} • ${animal.energy} energy`;
+      const traits = document.createElement("p");
+      traits.className = "traits";
+      traits.textContent = `${animal.personality} • ${animal.energy} energy`;
 
-    const btnBox = document.createElement("div");
-    btnBox.className = "card-buttons";
+      const btnBox = document.createElement("div");
+      btnBox.className = "card-buttons";
 
-    /* DETAILS BUTTON */
+      /* DETAILS */
 
-    const detailsBtn = document.createElement("button");
-    detailsBtn.textContent = "Details";
-    detailsBtn.addEventListener("click", () => {
-      saveLastViewed(animal);
-      window.location.href = "animal.html";
-    });
+      const detailsBtn = document.createElement("button");
+      detailsBtn.textContent = "Details";
+      detailsBtn.onclick = () => {
+        saveLastViewed(animal);
+        window.location.href = "animal.html";
+      };
 
-    /* FAVORITE BUTTON */
+      /* FAVORITE */
 
-    const favBtn = document.createElement("button");
-    favBtn.textContent = isFavorite(animal.id) ? "💖" : "❤️";
-
-    favBtn.addEventListener("click", () => {
-      toggleFavorite(animal);
+      const favBtn = document.createElement("button");
       favBtn.textContent = isFavorite(animal.id) ? "💖" : "❤️";
+
+      favBtn.onclick = () => {
+        toggleFavorite(animal);
+        favBtn.textContent = isFavorite(animal.id) ? "💖" : "❤️";
+      };
+
+      card.onmouseenter = () => card.classList.add("hover");
+      card.onmouseleave = () => card.classList.remove("hover");
+
+      btnBox.append(detailsBtn, favBtn);
+      card.append(img, title, info, traits, btnBox);
+      container.appendChild(card);
     });
+  }
 
-    card.addEventListener("mouseenter", () => card.classList.add("hover"));
-    card.addEventListener("mouseleave", () => card.classList.remove("hover"));
+  /* ---------------- FILTERS ---------------- */
 
-    btnBox.append(detailsBtn, favBtn);
-    card.append(img, title, info, traits, btnBox);
-    container.appendChild(card);
-  });
+  function applyFilters() {
+    let filtered = [...animals];
+
+    if (typeFilter.value)
+      filtered = filtered.filter(a => a.type === typeFilter.value);
+
+    if (ageFilter.value)
+      filtered = filtered.filter(a => a.age === ageFilter.value);
+
+    if (search.value)
+      filtered = filtered.filter(a =>
+        a.name.toLowerCase().includes(search.value.toLowerCase())
+      );
+
+    render(filtered);
+  }
+
+  search.addEventListener("input", applyFilters);
+  typeFilter.addEventListener("change", applyFilters);
+  ageFilter.addEventListener("change", applyFilters);
+
+  window.addEventListener("offline", () => status.textContent = "Offline mode ⚠");
+  window.addEventListener("online", () => status.textContent = "Back online ✅");
+
+  /* 🚀 START */
+  loadAnimals();
 }
 
-/* ---------------- FILTERS ---------------- */
-
-function applyFilters() {
-  let filtered = [...animals];
-
-  if (typeFilter.value)
-    filtered = filtered.filter(a => a.type === typeFilter.value);
-
-  if (ageFilter.value)
-    filtered = filtered.filter(a => a.age === ageFilter.value);
-
-  if (search.value)
-    filtered = filtered.filter(a =>
-      a.name.toLowerCase().includes(search.value.toLowerCase())
-    );
-
-  render(filtered);
-}
-
-/* ---------------- EVENTS ---------------- */
-
-search.addEventListener("input", applyFilters);
-typeFilter.addEventListener("change", applyFilters);
-ageFilter.addEventListener("change", applyFilters);
-
-window.addEventListener("load", loadAnimals);
-window.addEventListener("offline", () => status.textContent = "Offline mode ⚠");
-window.addEventListener("online", () => status.textContent = "Back online ✅");
+/* EJECUTA CUANDO EL DOM YA EXISTE */
+document.addEventListener("DOMContentLoaded", init);
 

@@ -7,9 +7,11 @@ export async function fetchCats() {
     const res = await fetch(CAT_API);
     const data = await res.json();
 
+    if (!Array.isArray(data)) return [];
+
     return data.map((cat) => ({
-      id: "cat-" + cat.id, 
-      name: getPetName("Cat", cat.id), 
+      id: "cat-" + hash(cat.url), // ⭐ ID estable
+      name: getPetName("Cat", cat.url),
       type: "Cat",
       age: randomAge(),
       energy: randomEnergy(),
@@ -22,6 +24,13 @@ export async function fetchCats() {
     console.error("Cat API failed", err);
     return [];
   }
+}
+
+function hash(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++)
+    h = str.charCodeAt(i) + ((h << 5) - h);
+  return Math.abs(h);
 }
 
 function randomAge() {

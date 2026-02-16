@@ -1,38 +1,34 @@
-const FAV_KEY = "favorites";
-const VIEW_KEY = "lastViewed";
-const THEME_KEY = "theme";
+const KEY = "favoriteAnimals";
 
-/* FAVORITES */
+/* Obtener favoritos */
 export function getFavorites() {
-  return JSON.parse(localStorage.getItem(FAV_KEY)) || [];
+  const data = localStorage.getItem(KEY);
+  return data ? JSON.parse(data) : [];
 }
 
-export function saveFavorite(animal) {
-  const favs = getFavorites();
+/* Guardar favoritos */
+export function saveFavorites(favs) {
+  localStorage.setItem(KEY, JSON.stringify(favs));
+}
 
-  if (!favs.find(a => a.id === animal.id)) {
+/* Agregar o quitar favorito */
+export function toggleFavorite(animal) {
+  let favs = getFavorites();
+
+  const exists = favs.find(a => a.id === animal.id);
+
+  if (exists) {
+    favs = favs.filter(a => a.id !== animal.id);
+  } else {
     favs.push(animal);
-    localStorage.setItem(FAV_KEY, JSON.stringify(favs));
   }
+
+  saveFavorites(favs);
+  return favs;
 }
 
-/* LAST VIEWED */
-export function saveLastViewed(animal) {
-  localStorage.setItem(VIEW_KEY, JSON.stringify(animal));
-}
-
-export function getLastViewed() {
-  return JSON.parse(localStorage.getItem(VIEW_KEY));
-}
-
-/* THEME */
-export function toggleTheme() {
-  const theme = localStorage.getItem(THEME_KEY) === "dark" ? "light" : "dark";
-  localStorage.setItem(THEME_KEY, theme);
-  document.body.dataset.theme = theme;
-}
-
-export function loadTheme() {
-  document.body.dataset.theme = localStorage.getItem(THEME_KEY) || "light";
+/* Verificar favorito */
+export function isFavorite(id) {
+  return getFavorites().some(a => a.id === id);
 }
 

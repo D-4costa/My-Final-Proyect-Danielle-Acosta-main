@@ -2,7 +2,8 @@
   box-sizing: border-box;
 }
 
-/* BASE */
+/* ================= BASE ================= */
+
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
@@ -11,9 +12,11 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  transition: background .35s ease, color .35s ease;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
+
 .header {
   background: linear-gradient(135deg, #4CAF50, #66BB6A);
   color: white;
@@ -30,7 +33,8 @@ body {
   font-weight: 500;
 }
 
-/* LAYOUT */
+/* ================= LAYOUT ================= */
+
 .layout {
   width: 100%;
   max-width: 1400px;
@@ -41,13 +45,15 @@ body {
   gap: 2.5rem;
 }
 
-/* FILTERS */
+/* ================= FILTERS ================= */
+
 .filters {
   background: white;
   padding: 1.8rem;
   border-radius: 18px;
   box-shadow: 0 8px 20px rgba(0,0,0,.08);
   height: fit-content;
+  transition: background .35s ease;
 }
 
 .filters label {
@@ -55,7 +61,28 @@ body {
   margin-bottom: 1.2rem;
 }
 
-/* GRID */
+/* INPUT ANIMATION (ADVANCED) */
+
+.filters input,
+.filters select {
+  width: 100%;
+  padding: .6rem .7rem;
+  border-radius: 10px;
+  border: 2px solid #e3e7e5;
+  transition: all .25s ease;
+  outline: none;
+  font-size: .95rem;
+}
+
+.filters input:focus,
+.filters select:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76,175,80,.15);
+  transform: scale(1.02);
+}
+
+/* ================= GRID ================= */
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -63,16 +90,18 @@ body {
   align-items: stretch;
 }
 
-/* CARD */
+/* ================= CARD ================= */
+
 .card {
   background: white;
   border-radius: 18px;
   box-shadow: 0 8px 20px rgba(0,0,0,.08);
   padding: 1.2rem;
   display: flex;
-  flex-direction: column;      
-  height: 100%;            
-  transition: transform .2s ease, box-shadow .2s ease;
+  flex-direction: column;
+  height: 100%;
+  transition: transform .25s ease, box-shadow .25s ease, background .35s ease;
+  perspective: 900px;
 }
 
 .card:hover {
@@ -80,16 +109,28 @@ body {
   box-shadow: 0 12px 26px rgba(0,0,0,.12);
 }
 
-/* IMAGE */
+.card.hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(0,0,0,.2);
+}
+
+/* IMAGE EFFECT */
+
 .card img {
   width: 100%;
-  height: 200px;           
-  object-fit: cover;      
+  height: 200px;
+  object-fit: cover;
   border-radius: 14px;
   margin-bottom: 0.8rem;
+  transition: transform .4s ease;
+}
+
+.card:hover img {
+  transform: scale(1.08);
 }
 
 /* TEXT */
+
 .card h3 {
   margin: 0.5rem 0 0.3rem;
 }
@@ -99,9 +140,10 @@ body {
   color: #555;
 }
 
-/* BUTTONS */
+/* ================= BUTTONS ================= */
+
 .card-buttons {
-  margin-top: auto;         
+  margin-top: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -113,14 +155,30 @@ body {
   font-weight: 500;
 }
 
+/* MICRO INTERACTIONS */
+
 .card-buttons button {
   border: none;
-  background: none;
-  font-size: 1.2rem;
+  background: #f1f3f2;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
   cursor: pointer;
+  transition: transform .18s ease, background .2s ease;
 }
 
-/* STATUS */
+.card-buttons button:hover {
+  background: #4CAF50;
+  color: white;
+  transform: scale(1.2) rotate(8deg);
+}
+
+.card-buttons button:active {
+  transform: scale(.9);
+}
+
+/* ================= STATUS ================= */
+
 #status {
   text-align: center;
   margin-bottom: 1.5rem;
@@ -128,13 +186,15 @@ body {
   font-weight: 500;
 }
 
-/* MAP */
+/* ================= MAP ================= */
+
 .map-container {
   margin-top: 3rem;
   background: white;
   padding: 1.8rem;
   border-radius: 18px;
   box-shadow: 0 8px 20px rgba(0,0,0,.08);
+  transition: background .35s ease;
 }
 
 .map-container h2 {
@@ -148,7 +208,8 @@ body {
   border-radius: 14px;
 }
 
-/* FOOTER */
+/* ================= FOOTER ================= */
+
 .footer {
   margin-top: auto;
   background: #4CAF50;
@@ -156,9 +217,64 @@ body {
   text-align: center;
   padding: 0.9rem;
   font-size: 0.85rem;
+  transition: background .35s ease;
 }
 
-/* RESPONSIVE */
+/* ================= ANIMATIONS ================= */
+
+.fade-in {
+  animation: fade .6s ease forwards;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* SKELETON LOADING (ADVANCED) */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #e8ecea 25%,
+    #f5f7f6 50%,
+    #e8ecea 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+  border-radius: 14px;
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+/* ================= DARK MODE ================= */
+
+body[data-theme="dark"] {
+  background: #121212;
+  color: #eee;
+}
+
+body[data-theme="dark"] .card,
+body[data-theme="dark"] .filters,
+body[data-theme="dark"] .map-container {
+  background: #1e1e1e;
+}
+
+body[data-theme="dark"] .footer {
+  background: #1a1a1a;
+}
+
+/* ================= RESPONSIVE ================= */
+
 @media (max-width: 900px) {
   .layout {
     grid-template-columns: 1fr;

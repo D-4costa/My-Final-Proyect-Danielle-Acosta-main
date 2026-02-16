@@ -1,46 +1,20 @@
-import { getPetName } from "../utils/petNames.js";
+// js/catapi.js
+import { catNames, getRandomName } from "./petnames.js";
 
-const CAT_API = "https://api.thecatapi.com/v1/images/search?limit=12";
-
-export async function fetchCats() {
+export async function getCats(amount = 6) {
   try {
-    const res = await fetch(CAT_API);
+    const res = await fetch(`https://api.thecatapi.com/v1/images/search?limit=${amount}`);
     const data = await res.json();
 
-    if (!Array.isArray(data)) return [];
-
-    return data.map((cat) => ({
-      id: "cat-" + hash(cat.url), // ⭐ ID estable
-      name: getPetName("Cat", cat.url),
-      type: "Cat",
-      age: randomAge(),
-      energy: randomEnergy(),
-      size: "Small",
-      image: cat.url,
-      personality: randomPersonality()
+    return data.map((cat, index) => ({
+      id: "cat-" + Date.now() + "-" + index,
+      type: "cat",
+      name: getRandomName(catNames),
+      image: cat.url
     }));
 
   } catch (err) {
-    console.error("Cat API failed", err);
+    console.error("Cat API failed:", err);
     return [];
   }
-}
-
-function hash(str) {
-  let h = 0;
-  for (let i = 0; i < str.length; i++)
-    h = str.charCodeAt(i) + ((h << 5) - h);
-  return Math.abs(h);
-}
-
-function randomAge() {
-  return ["Baby","Young","Adult","Senior"][Math.floor(Math.random()*4)];
-}
-
-function randomEnergy() {
-  return ["Low","Medium","High"][Math.floor(Math.random()*3)];
-}
-
-function randomPersonality() {
-  return ["Independent","Lazy","Cuddly","Curious","Chaotic"][Math.floor(Math.random()*5)];
 }

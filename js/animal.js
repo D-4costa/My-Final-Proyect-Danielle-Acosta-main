@@ -1,4 +1,4 @@
-import { getLastViewed, saveFavorite, isFavorite } from "./utils/storage.js";
+import { getLastViewed, toggleFavorite, isFavorite } from "./utils/storage.js";
 
 const el = document.getElementById("animal-detail");
 
@@ -27,7 +27,7 @@ function renderAnimal(a) {
   const btn = document.getElementById("favBtn");
 
   btn.addEventListener("click", () => {
-    saveFavorite(a);
+    toggleFavorite(a);
     btn.textContent = isFavorite(a.id)
       ? "💖 Remove Favorite"
       : "❤️ Add to Favorites";
@@ -40,3 +40,4 @@ function init() {
 }
 
 window.addEventListener("load", init);
+

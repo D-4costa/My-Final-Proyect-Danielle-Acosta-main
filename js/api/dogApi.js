@@ -7,9 +7,11 @@ export async function fetchDogs() {
     const res = await fetch(DOG_API);
     const data = await res.json();
 
-    return data.message.map((img, index) => ({
-      id: "dog-" + img.split("/").slice(-2).join("-"), // id estable
-      name: getPetName("Dog", img), // ⭐ nombre real
+    if (!data.message) return [];
+
+    return data.message.map((img) => ({
+      id: "dog-" + hash(img), 
+      name: getPetName("Dog", img),
       type: "Dog",
       age: randomAge(),
       energy: randomEnergy(),
@@ -22,6 +24,13 @@ export async function fetchDogs() {
     console.error("Dog API failed", err);
     return [];
   }
+}
+
+function hash(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++)
+    h = str.charCodeAt(i) + ((h << 5) - h);
+  return Math.abs(h);
 }
 
 function randomAge() {
@@ -39,3 +48,4 @@ function randomSize() {
 function randomPersonality() {
   return ["Friendly","Calm","Playful","Shy","Protective"][Math.floor(Math.random()*5)];
 }
+

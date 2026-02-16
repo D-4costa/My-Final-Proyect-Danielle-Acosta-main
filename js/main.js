@@ -51,10 +51,17 @@ function render(list) {
     img.src = animal.image;
     img.alt = animal.name;
 
-    // fallback si la imagen falla
     img.onerror = () => {
       img.src = "https://cdn-icons-png.flaticon.com/512/616/616408.png";
     };
+
+    const favIcon = document.createElement("button");
+    favIcon.className = "fav";
+    favIcon.textContent = isFavorite(animal.id) ? "💖" : "❤️";
+
+    const detailsBtn = document.createElement("button");
+    detailsBtn.className = "details";
+    detailsBtn.textContent = "Details";
 
     card.appendChild(img);
 
@@ -62,59 +69,31 @@ function render(list) {
       <h3>${animal.name}</h3>
       <p>${animal.type} • ${animal.age}</p>
       <p class="traits">${animal.personality} • ${animal.energy} energy</p>
-
-      <div class="card-buttons">
-        <button class="details">Details</button>
-        <button class="fav">❤️</button>
-      </div>
     `;
 
-    /* FAVORITES */
-    card.querySelector(".fav").addEventListener("click", () => {
+    const btnBox = document.createElement("div");
+    btnBox.className = "card-buttons";
+
+    btnBox.appendChild(detailsBtn);
+    btnBox.appendChild(favIcon);
+    card.appendChild(btnBox);
+
+    /* FAVORITE */
+    favIcon.addEventListener("click", () => {
       saveFavorite(animal);
-      card.querySelector(".fav").textContent = "💖";
+      favIcon.textContent = "💖";
     });
 
     /* DETAILS */
-    card.querySelector(".details").addEventListener("click", () => {
+    detailsBtn.addEventListener("click", () => {
       saveLastViewed(animal);
-      window.location = `animal.html?id=${animal.id}`;
+      window.location = "animal.html";
     });
 
-    /* HOVER EVENTS */
+    /* HOVER */
     card.addEventListener("mouseenter", () => card.classList.add("hover"));
     card.addEventListener("mouseleave", () => card.classList.remove("hover"));
 
     container.appendChild(card);
   });
 }
-
-/* ---------------- FILTERS ---------------- */
-
-function applyFilters() {
-  let filtered = [...animals];
-
-  if (typeFilter.value)
-    filtered = filtered.filter(a => a.type === typeFilter.value);
-
-  if (ageFilter.value)
-    filtered = filtered.filter(a => a.age === ageFilter.value);
-
-  if (search.value)
-    filtered = filtered.filter(a =>
-      a.name.toLowerCase().includes(search.value.toLowerCase())
-    );
-
-  render(filtered);
-}
-
-/* ---------------- EVENTS ---------------- */
-
-search.addEventListener("input", applyFilters);
-typeFilter.addEventListener("change", applyFilters);
-ageFilter.addEventListener("change", applyFilters);
-
-window.addEventListener("load", loadAnimals);
-window.addEventListener("offline", () => status.textContent = "Offline mode ⚠");
-window.addEventListener("online", () => status.textContent = "Back online ✅");
-

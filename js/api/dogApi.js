@@ -1,3 +1,5 @@
+import { getPetName } from "../utils/petNames.js";
+
 const DOG_API = "https://dog.ceo/api/breeds/image/random/12";
 
 export async function fetchDogs() {
@@ -6,8 +8,8 @@ export async function fetchDogs() {
     const data = await res.json();
 
     return data.message.map((img, index) => ({
-      id: "dog-" + index,
-      name: `Dog ${index + 1}`,
+      id: "dog-" + img.split("/").slice(-2).join("-"), // id estable
+      name: getPetName("Dog", img), // ⭐ nombre real
       type: "Dog",
       age: randomAge(),
       energy: randomEnergy(),

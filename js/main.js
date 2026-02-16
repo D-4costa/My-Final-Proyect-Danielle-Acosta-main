@@ -19,7 +19,6 @@ async function loadAnimals() {
     const dogs = await fetchDogs();
     const cats = await fetchCats();
 
-    // unir datos SIN modificar estructura
     animals = [...dogs, ...cats];
 
     status.textContent = `Loaded ${animals.length} pets 🐾`;
@@ -47,15 +46,12 @@ function render(list) {
     const card = document.createElement("div");
     card.className = "card fade-in";
 
-    /* IMAGE */
     const img = document.createElement("img");
     img.src = animal.image;
     img.alt = animal.name;
-    img.onerror = () => {
+    img.onerror = () =>
       img.src = "https://cdn-icons-png.flaticon.com/512/616/616408.png";
-    };
 
-    /* TEXT */
     const title = document.createElement("h3");
     title.textContent = animal.name;
 
@@ -66,35 +62,31 @@ function render(list) {
     traits.className = "traits";
     traits.textContent = `${animal.personality} • ${animal.energy} energy`;
 
-    /* BUTTONS */
     const btnBox = document.createElement("div");
     btnBox.className = "card-buttons";
 
+    /* DETAILS BUTTON */
+
     const detailsBtn = document.createElement("button");
     detailsBtn.textContent = "Details";
+    detailsBtn.addEventListener("click", () => {
+      saveLastViewed(animal);
+      window.location.href = "animal.html";
+    });
+
+    /* FAVORITE BUTTON */
 
     const favBtn = document.createElement("button");
     favBtn.textContent = isFavorite(animal.id) ? "💖" : "❤️";
 
-    /* EVENTS */
-
-    // Toggle favorite
     favBtn.addEventListener("click", () => {
       toggleFavorite(animal);
       favBtn.textContent = isFavorite(animal.id) ? "💖" : "❤️";
     });
 
-    // Go to detail page
-    detailsBtn.addEventListener("click", () => {
-      saveLastViewed(animal);
-      window.location = `animal.html?id=${animal.id}`;
-    });
-
-    // Hover animation
     card.addEventListener("mouseenter", () => card.classList.add("hover"));
     card.addEventListener("mouseleave", () => card.classList.remove("hover"));
 
-    /* BUILD CARD */
     btnBox.append(detailsBtn, favBtn);
     card.append(img, title, info, traits, btnBox);
     container.appendChild(card);

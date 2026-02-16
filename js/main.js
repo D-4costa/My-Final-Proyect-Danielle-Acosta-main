@@ -1,6 +1,6 @@
 import { fetchDogs } from "./api/dogApi.js";
 import { fetchCats } from "./api/catApi.js";
-import { saveFavorite, saveLastViewed, isFavorite } from "./utils/storage.js";
+import { toggleFavorite, saveLastViewed, isFavorite } from "./utils/storage.js";
 
 const container = document.getElementById("animals");
 const status = document.getElementById("status");
@@ -19,6 +19,7 @@ async function loadAnimals() {
     const dogs = await fetchDogs();
     const cats = await fetchCats();
 
+    // unir datos SIN modificar estructura
     animals = [...dogs, ...cats];
 
     status.textContent = `Loaded ${animals.length} pets 🐾`;
@@ -46,12 +47,15 @@ function render(list) {
     const card = document.createElement("div");
     card.className = "card fade-in";
 
+    /* IMAGE */
     const img = document.createElement("img");
     img.src = animal.image;
     img.alt = animal.name;
-    img.onerror = () =>
+    img.onerror = () => {
       img.src = "https://cdn-icons-png.flaticon.com/512/616/616408.png";
+    };
 
+    /* TEXT */
     const title = document.createElement("h3");
     title.textContent = animal.name;
 
@@ -62,6 +66,7 @@ function render(list) {
     traits.className = "traits";
     traits.textContent = `${animal.personality} • ${animal.energy} energy`;
 
+    /* BUTTONS */
     const btnBox = document.createElement("div");
     btnBox.className = "card-buttons";
 
@@ -73,19 +78,23 @@ function render(list) {
 
     /* EVENTS */
 
+    // Toggle favorite
     favBtn.addEventListener("click", () => {
-      saveFavorite(animal);
-      favBtn.textContent = "💖";
+      toggleFavorite(animal);
+      favBtn.textContent = isFavorite(animal.id) ? "💖" : "❤️";
     });
 
+    // Go to detail page
     detailsBtn.addEventListener("click", () => {
       saveLastViewed(animal);
-      window.location = "animal.html";
+      window.location = `animal.html?id=${animal.id}`;
     });
 
+    // Hover animation
     card.addEventListener("mouseenter", () => card.classList.add("hover"));
     card.addEventListener("mouseleave", () => card.classList.remove("hover"));
 
+    /* BUILD CARD */
     btnBox.append(detailsBtn, favBtn);
     card.append(img, title, info, traits, btnBox);
     container.appendChild(card);
@@ -116,6 +125,7 @@ function applyFilters() {
 search.addEventListener("input", applyFilters);
 typeFilter.addEventListener("change", applyFilters);
 ageFilter.addEventListener("change", applyFilters);
+
 window.addEventListener("load", loadAnimals);
 window.addEventListener("offline", () => status.textContent = "Offline mode ⚠");
 window.addEventListener("online", () => status.textContent = "Back online ✅");

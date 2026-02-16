@@ -1,21 +1,30 @@
-// js/dogapi.js
-import { dogNames, getRandomName } from "./petnames.js";
+import { dogNames, getRandomName } from "../petnames.js";
 
-export async function getDogs(amount = 6) {
+const ages = ["Baby", "Young", "Adult", "Senior"];
+const personalities = ["Playful", "Calm", "Shy", "Friendly", "Curious"];
+const energies = ["Low", "Medium", "High"];
+
+function random(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+export async function fetchDogs(count = 6) {
   try {
-    const res = await fetch(`https://dog.ceo/api/breeds/image/random/${amount}`);
+    const res = await fetch(`https://dog.ceo/api/breeds/image/random/${count}`);
     const data = await res.json();
 
-    return data.message.map((img, index) => ({
-      id: "dog-" + Date.now() + "-" + index,
-      type: "dog",
+    return data.message.map((img, i) => ({
+      id: "dog-" + Date.now() + "-" + i,
       name: getRandomName(dogNames),
-      image: img
+      image: img,
+      type: "Dog",
+      age: random(ages),
+      personality: random(personalities),
+      energy: random(energies)
     }));
 
   } catch (err) {
-    console.error("Dog API failed:", err);
+    console.error("Dog API error:", err);
     return [];
   }
 }
-

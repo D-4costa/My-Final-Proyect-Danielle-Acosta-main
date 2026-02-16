@@ -1,34 +1,34 @@
-const KEY = "favoriteAnimals";
+const FAV_KEY = "favorites";
+const LAST_KEY = "lastViewed";
 
-/* Obtener favoritos */
+/* ---------- FAVORITES ---------- */
+
 export function getFavorites() {
-  const data = localStorage.getItem(KEY);
-  return data ? JSON.parse(data) : [];
+  return JSON.parse(localStorage.getItem(FAV_KEY)) || [];
 }
 
-/* Guardar favoritos */
-export function saveFavorites(favs) {
-  localStorage.setItem(KEY, JSON.stringify(favs));
-}
-
-/* Agregar o quitar favorito */
-export function toggleFavorite(animal) {
-  let favs = getFavorites();
-
-  const exists = favs.find(a => a.id === animal.id);
-
-  if (exists) {
-    favs = favs.filter(a => a.id !== animal.id);
-  } else {
-    favs.push(animal);
-  }
-
-  saveFavorites(favs);
-  return favs;
-}
-
-/* Verificar favorito */
 export function isFavorite(id) {
   return getFavorites().some(a => a.id === id);
 }
+
+export function saveFavorite(animal) {
+  let favs = getFavorites();
+
+  if (!favs.some(a => a.id === animal.id)) {
+    favs.push(animal);
+  }
+
+  localStorage.setItem(FAV_KEY, JSON.stringify(favs));
+}
+
+/* ---------- LAST VIEWED ---------- */
+
+export function saveLastViewed(animal) {
+  localStorage.setItem(LAST_KEY, JSON.stringify(animal));
+}
+
+export function getLastViewed() {
+  return JSON.parse(localStorage.getItem(LAST_KEY));
+}
+
 
